@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <style type="text/tailwindcss">
+        @layer utilities {
+          .content-auto {
+            content-visibility: auto;
+          }
+        }
+    </style>
+    <title>Student</title>
+</head>
+<body>
+  <div class="flex">
+      <!-- Sidebar -->
+      <div class="bg-[#F2EAE1] w-[20%] h-[100vh]">
+          <img src="./images/logo.png" alt="logo" class="pt-[18px] pl-[25px]" width="200" height="35">
+          <label>
+              <input type="file" class="changeImgUrl hidden">
+              <img src="./images/user.jpg" alt="user" width="128" height="128" class="render-img rounded-full mx-auto mt-[54px]">
+          </label>
+          <h3 class="adminname text-[20px] pb-[10px] text-center mt-[20px] capitalize font-bold tracking-wide"></h3>
+          <span class="text-center block text-[#FEAF00] text-[16px] font-normal">Admin</span>
+          <div class="mx-auto w-[193px] mt-[63px]">
+              <a href="#" class="w-full py-2 bg-[#FEAF00] block flex px-[40px] gap-[15px] rounded-lg">
+                  <img src="./images/cap.svg" alt="cap">
+                  <span class="font-medium">Students</span>
+              </a>
+              <button onclick="clickLogout()" class="flex mx-auto gap-[23px] items-center mt-[270px] font-medium">
+                  Logout <img src="./images/logout.svg" alt="logout">
+              </button>
+          </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="w-[80%] bg-slate-100 h-[100vh]">
+          <div class="h-[60px] w-full bg-[#F2EAE1] flex items-center justify-between pl-[30px] pr-[50px]">
+              <a href="#"><img src="./images/back.svg"></a>
+              <div class="flex gap-[27px]">
+                  <label class="flex w-[212px] bg-white px-[13px] py-[7px] rounded-lg justify-between">
+                      <input type="text" placeholder="Search..." name="search" class="w-[85%] search-input outline-none">
+                      <button><img src="./images/search.svg" alt="search"></button>
+                  </label>
+                  <img src="./images/message.svg" alt="message">
+              </div>
+          </div>
+          <div class="flex items-center justify-between h-[62px] border-b-[2px] border-slate-300 w-[96%] mx-auto">
+              <h2 class="font-bold text-[22px]">Students List</h2>
+              <div class="flex gap-[30px]">
+                  <button onclick="SortClick()"><img src="./images/sort.svg" alt="sort"></button>
+                  <button id="openModal" class="bg-[#FEAF00] text-white text-center py-2.5 w-[200px] rounded-lg text-[14px] border border-transparent hover:border-[#FEAF00] hover:text-[#FEAF00] hover:bg-white transition-all duration-300">
+                    ADD NEW STUDENT
+                </button>                
+              </div>
+          </div>
+          <table class="w-[96%] mx-auto">
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th class="text-left p-4 text-slate-500 text-[12px] font-semibold">Name</th>
+                      <th class="text-left p-4 text-slate-500 text-[12px] font-semibold">Email</th>
+                      <th class="text-left p-4 text-slate-500 text-[12px] font-semibold">Phone</th>
+                      <th class="text-left p-4 text-slate-500 text-[12px] font-semibold">Enroll Number</th>
+                      <th class="text-left p-4 text-slate-500 text-[12px] font-semibold">Date admission</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody class="table-body"></tbody>
+          </table>
+      </div>
+  </div>
+
+  <!-- Add New Student Modal -->
+  <div id="addStudentModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 hidden">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-[80%] max-w-[800px]">
+          <div class="flex items-center justify-between border-b-[2px] border-slate-300 pb-4 mb-4">
+              <h2 class="font-bold text-[22px]">Add Student</h2>
+              <button id="closeModal" class="bg-red-500 text-white text-center py-2.5 w-[100px] rounded-lg text-[14px] tracking-wider">Close</button>
+          </div>
+          <form id="studentForm" class="w-full flex flex-wrap gap-10">
+              <div class="w-full md:w-[45%] flex flex-col gap-10">
+                  <label>
+                      <span>Name</span>
+                      <input type="text" name="name" placeholder="Name" required class="w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+                  </label>
+                  <label>
+                      <span>Enroll Number</span>
+                      <input type="number" name="enrollnumber" placeholder="Enroll Number" required class="number-input w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+                  </label>
+                  <label>
+                      <span>Phone</span>
+                      <input type="number" name="phone" placeholder="Phone" required class="number-input w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+                  </label>
+              </div>
+              <div class="w-full md:w-[45%] flex flex-col gap-10">
+                  <label>
+                      <span>Email</span>
+                      <input type="email" name="email" placeholder="Email" required class="number-input w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+                  </label>
+                  <label>
+                      <span>Date admission</span>
+                      <input type="date" name="date" placeholder="Date admission" required class="w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+                  </label>
+                  <label>
+                      <img src="./images/user.jpg" alt="user" class="upload-img rounded-full" width="100" height="100">
+                      <input type="file" class="hidden change-avatar">
+                  </label>
+              </div>
+              <div class="w-full flex justify-end mt-4">
+                  <button type="submit" class="bg-[#FEAF00] text-white text-center py-2.5 w-[100px] rounded-lg text-[14px] tracking-wider">Save</button>
+              </div>
+          </form>
+      </div>
+  </div>
+  <!-- Update Modal -->
+<div id="updateStudentModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-[80%] max-w-[800px]">
+      <div class="flex items-center justify-between border-b-[2px] border-slate-300 pb-4 mb-4">
+          <h2 class="font-bold text-[22px]">Update Student</h2>
+          <button id="closeUpdateModal" class="bg-red-500 text-white text-center py-2.5 w-[100px] rounded-lg text-[14px] tracking-wider">Close</button>
+      </div>
+      <form id="updateStudentForm" class="w-full flex flex-wrap gap-10">
+          <div class="w-full md:w-[45%] flex flex-col gap-10">
+              <label>
+                  <span>Name</span>
+                  <input type="text" name="name" placeholder="Name" required class="w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+              </label>
+              <label>
+                  <span>Enroll Number</span>
+                  <input type="number" name="enrollnumber" placeholder="Enroll Number" required class="number-input w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+              </label>
+              <label>
+                  <span>Phone</span>
+                  <input type="number" name="phone" placeholder="Phone" required class="number-input w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+              </label>
+          </div>
+          <div class="w-full md:w-[45%] flex flex-col gap-10">
+              <label>
+                  <span>Email</span>
+                  <input type="email" name="email" placeholder="Email" required class="number-input w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+              </label>
+              <label>
+                  <span>Date admission</span>
+                  <input type="date" name="date" placeholder="Date admission" required class="w-full p-3 border-slate-500 border-[2px] rounded-lg outline-none mt-[5px]" autocomplete="off">
+              </label>
+              <label>
+                  <img src="./images/user.jpg" alt="user" class="upload-img rounded-full" width="100" height="100">
+                  <input type="file" class="hidden change-avatar">
+              </label>
+          </div>
+          <div class="w-full flex justify-end mt-4">
+              <button type="submit" class="bg-[#FEAF00] text-white text-center py-2.5 w-[100px] rounded-lg text-[14px] tracking-wider">Update</button>
+          </div>
+      </form>
+  </div>
+</div>
+  <!-- Delete Confirmation Modal -->
+<div id="deleteConfirmationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-[80%] max-w-[400px]">
+      <div class="flex items-center justify-between border-b-[2px] border-slate-300 pb-4 mb-4">
+          <h2 class="font-bold text-[22px]">Delete Confirmation</h2>
+          <button id="closeDeleteModal" class="bg-red-500 text-white text-center py-2.5 w-[100px] rounded-lg text-[14px] tracking-wider">Close</button>
+      </div>
+      <h1 class="text-center text-lg mb-4">Rostdan ham o'chirmoqchimisiz?</h1>
+      <div class="flex justify-center gap-4">
+          <button id="confirmDelete" class="bg-red-500 text-white text-center py-2.5 w-[100px] rounded-lg text-[14px] hover:bg-red-600">Ha</button>
+          <button id="cancelDelete" class="bg-blue-500 text-white text-center py-2.5 w-[100px] rounded-lg text-[14px] hover:bg-blue-600">Yoq</button>
+      </div>
+  </div>
+</div>
+
+  <script src="./js/student.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      tailwind.config = {
+          theme: {
+              extend: {
+                  colors: {
+                      clifford: '#da373d',
+                  }
+              }
+          }
+      }
+  </script>
+</body>
+
+</html>

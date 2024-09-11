@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <style type="text/tailwindcss">
+        @layer utilities {
+          .content-auto {
+            content-visibility: auto;
+          }
+        }
+    </style>
+    <title>Sign Up</title>
+</head>
+<body class="bg-yellow-400">
+    <div class="fixed top-0 bottom-0 right-0 left-0 m-auto w-[475px] h-[550px] rounded-[20px] bg-white px-[30px]">
+      <div class="mt-[44px] ml-[28px] flex gap-[12px] items-center">
+        <div class="h-[36px] w-[6px] bg-yellow-400"></div>
+        <div class="font-bold text-[32px]"><h1>Admin Students</h1></div>
+      </div>
+      <h2 class="font-semibold text-[22px] text-center mt-[35px]">SIGN UP</h2>
+      <p class="text-[#6C6C6C] text-center mt-[9px] font-normal">Enter your credentials to access your account</p>
+      <form class="register-form">
+        <label>
+          <span class="block mb-[8px] mt-[45px] text-[16px] font-medium text-[#6C6C6C]">Enter new login</span>
+          <input required class="border-[2px] border-slate-400 w-full p-2 outline-none rounded-[4px]" type="text" placeholder="Enter your login" name="login">
+        </label>
+        <label>
+          <span class="block mb-[8px] mt-[19px] text-[16px] font-medium text-[#6C6C6C]">Create new Password</span>
+          <input required class="border-[2px] border-slate-400 w-full p-2 outline-none rounded-[4px]" type="password" placeholder="Enter your password" name="password">
+        </label>
+        <button type="submit" class="w-full p-2.5 rounded-[4px] bg-[#FEAF00] text-white mt-[30px]border border-transparent hover:border-[#FEAF00] hover:text-[#FEAF00] hover:bg-white transition-all duration-300"">SIGN UP</button>
+      </form>
+    </div>
+
+    <script src="./js/signup.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                clifford: '#da373d',
+              }
+            }
+          }
+        }
+    </script>
+</body>
+</html>

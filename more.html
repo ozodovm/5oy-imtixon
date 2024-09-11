@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <style type="text/tailwindcss">
+        @layer utilities {
+          .content-auto {
+            content-visibility: auto;
+          }
+        }
+    </style>
+    <title>More</title>
+</head>
+<body>
+    <div class="flex">
+      <div class="bg-[#F2EAE1] w-[20%] h-[100vh]">
+        <img src="./images/logo.png" alt="logo" class="pt-[18px] pl-[25px]" width="200" height="35">
+        <label >
+          <input type="file" class="changeImgUrl hidden">
+          <img src="./images/user.jpg" alt="user" width="128" height="128" class="render-img rounded-full mx-auto mt-[54px]">
+        </label>
+        <h3 class="adminname text-[20px] pb-[10px] text-center mt-[20px] capitalize font-bold tracking-wide"></h3>
+        <span class="text-center block text-[#FEAF00] text-[16px] font-normal">Admin</span>
+        <div class="mx-auto w-[193px] mt-[63px]">
+          <a href="#" class="w-full py-2 bg-[#FEAF00] block flex px-[40px] gap-[15px] rounded-lg">
+            <img src="./images/cap.svg" alt="cap">
+            <span class="font-medium">Students</span>
+          </a>
+          <button onclick="clickLogout()" class="flex mx-auto gap-[23px] items-center  mt-[250px] font-medium">Logout <img src="./images/logout.svg" alt="logout"></button>
+        </div>
+      </div>
+      <div class="w-[80%] bg-slate-100 h-[100vh]">
+        <div class="h-[60px] w-full bg-[#F2EAE1] flex items-center justify-between pl-[30px] pr-[50px]">
+          <a href="/student.html"><img src="./images/back.svg"></a>
+          <div class="flex gap-[27px]">
+            <label class="flex w-[212px] bg-white px-[13px] py-[7px] rounded-lg justify-between">
+              <input type="text" placeholder="Search..." name="search" class="w-[85%] search-input outline-none">
+              <button><img src="./images/search.svg" alt="search"></button>
+            </label>
+            <img src="./images/message.svg" alt="message">
+          </div>
+        </div>
+        <div class="flex items-center justify-between h-[62px] border-b-[2px] border-slate-300 w-[96%] mx-auto">
+          <h2 class="title font-bold text-[22px]"></h2>
+        </div>
+        <div class="more-list w-[96%] mx-auto"></div>
+      </div>
+    </div>
+    
+    <script src="./js/more.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                clifford: '#da373d',
+              }
+            }
+          }
+        }
+    </script>
+</body>
+</html>
